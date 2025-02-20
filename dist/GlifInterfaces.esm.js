@@ -1,5 +1,6 @@
 import { expectText } from 'javascript-interface-library';
-import { GlifRunner } from 'GlifRunner';
+import { GlifRunner } from 'glifrunner';
+export { GlifRunner } from 'glifrunner';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.

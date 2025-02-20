@@ -3,6 +3,8 @@
 *                                GlifInterfaces                                *
 *                                                                              *
 *******************************************************************************/
+import { GlifRunner } from "glifrunner";
+export { GlifRunner };
 /**** fencable - escapes "»" and "«" ****/
 export declare function fencable(Text: string): string;
 /**** fenced - "fences" a text between "»»»" and "«««" ****/
