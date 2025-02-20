@@ -1,4 +1,4 @@
-import { expectText } from 'javascript-interface-library';
+import { expectText, throwError, ValueIsOneOf } from 'javascript-interface-library';
 import { GlifRunner } from 'glifrunner';
 export { GlifRunner } from 'glifrunner';
 
@@ -88,7 +88,21 @@ var LanguageCodes = [
     'ar', 'bn', 'bg', 'zh', 'da', 'de', 'en', 'et', 'fi', 'fr', 'el', 'iw', 'hi', 'it',
     'ko', 'hr', 'nl', 'pt', 'es', 'cs', 'hu', 'unknown'
 ];
-var LanguageCodeSet = new Set(LanguageCodes);
+var Languages = [
+    'arabic', 'bengali', 'bulgarian', 'chinese', 'danish', 'german', 'english',
+    'estonian', 'finnish', 'french', 'greek', 'hebrew', 'hindi', 'italian',
+    'korean', 'croatian', 'dutch', 'portuguese', 'spanish', 'czech', 'hungarian'
+];
+var LanguageSet = Object.assign(Object.create(null), {
+    'ar': 'arabic', 'bn': 'bengali', 'bg': 'bulgarian',
+    'zh': 'chinese', 'da': 'danish', 'de': 'german',
+    'en': 'english', 'et': 'estonian', 'fi': 'finnish',
+    'fr': 'french', 'el': 'greek', 'iw': 'hebrew',
+    'hi': 'hindi', 'it': 'italian', 'ko': 'korean',
+    'hr': 'croatian', 'nl': 'dutch', 'pt': 'portuguese',
+    'es': 'spanish', 'cs': 'czech', 'hu': 'hungarian',
+    'unknown': 'unknown'
+});
 function LanguageOfText(Text) {
     return __awaiter(this, void 0, void 0, function () {
         var fencableText, Response, LanguageCode;
@@ -101,11 +115,40 @@ function LanguageOfText(Text) {
                 case 1:
                     Response = _a.sent();
                     LanguageCode = unfenced(Response.output).trim();
-                    return [2 /*return*/, (LanguageCodeSet.has(LanguageCode) ? LanguageCode : 'unknown')];
+                    return [2 /*return*/, (LanguageCode in LanguageSet ? LanguageCode : 'unknown')];
+            }
+        });
+    });
+}
+/**** TranslationOfTextInto - translates a given text into a supported language ****/
+function TranslationOfTextInto(Text, TargetLanguage) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableText, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('text to be translated', Text);
+                    switch (true) {
+                        case (TargetLanguage == null):
+                            throwError('MissingArgument: no "TargetLanguage" given');
+                        case (TargetLanguage === 'unknown'):
+                            return [2 /*return*/, Text];
+                        case ValueIsOneOf(TargetLanguage, LanguageCodes):
+                            TargetLanguage = LanguageSet[TargetLanguage];
+                        case ValueIsOneOf(TargetLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "TargetLanguage" given');
+                    }
+                    fencableText = fencable(Text);
+                    return [4 /*yield*/, GlifRunner.run('cm7dj2je40003yilbq4y0hl4h', [fencableText, TargetLanguage])];
+                case 1:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
             }
         });
     });
 }
 
-export { LanguageCodes, LanguageOfText, fencable, fenced, unfenced };
+export { LanguageCodes, LanguageOfText, Languages, TranslationOfTextInto, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map
