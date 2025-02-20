@@ -47,6 +47,8 @@
   ]
   export type LanguageCode = typeof LanguageCodes[number]
 
+  const LanguageCodeSet = new Set(LanguageCodes)
+
   export async function LanguageOfText (Text:string):Promise<LanguageCode> {
     expectText('text to be analyzed',Text)
 
@@ -54,8 +56,8 @@
     const Response     = await GlifRunner.run(
       'cm7d23nop0000ona1b5b1cotg',[fencedText]
     ) as Indexable
-    const LanguageCode = unfenced(Response.output as string)
-    return (LanguageCodes.indexOf(LanguageCode) >= 0 ? LanguageCode : 'unknown')
+    const LanguageCode = unfenced(Response.output as string).trim()
+    return (LanguageCodeSet.has(LanguageCode) ? LanguageCode : 'unknown')
   }
 
 
