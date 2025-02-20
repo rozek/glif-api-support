@@ -1,5 +1,5 @@
-# glif-api-support #
+# glif-interfaces #
 
-a growing list of TypeScript clients for Glifs intended to be used in AI agents
+a growing list of TypeScript interfaces for Glifs intended to be used in AI agents
 
 
