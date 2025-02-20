@@ -38,13 +38,14 @@ For Svelte, it is recommended to import the package in a module context. From th
 
 ```html
 <script context="module">
-  import { GlifRunner,LanguageOfText } from 'glif-interfaces'
+  import { GlifRunner,LanguageOfText,TranslationOfTextInto } from 'glif-interfaces'
 </script>
 
 <script>
   GlifRunner.APIToken = '...'
   ;(async () => {
     console.log(await LanguageOfText('Hello, World!'))
+    console.log(await TranslationOfTextInto('Hello, World!','german'))
   })()
 </script>
 ```
