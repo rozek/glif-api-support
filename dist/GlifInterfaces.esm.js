@@ -91,13 +91,13 @@ var LanguageCodes = [
 var LanguageCodeSet = new Set(LanguageCodes);
 function LanguageOfText(Text) {
     return __awaiter(this, void 0, void 0, function () {
-        var fencedText, Response, LanguageCode;
+        var fencableText, Response, LanguageCode;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     expectText('text to be analyzed', Text);
-                    fencedText = fenced(Text);
-                    return [4 /*yield*/, GlifRunner.run('cm7d23nop0000ona1b5b1cotg', [fencedText])];
+                    fencableText = fencable(Text);
+                    return [4 /*yield*/, GlifRunner.run('cm7d23nop0000ona1b5b1cotg', [fencableText])];
                 case 1:
                     Response = _a.sent();
                     LanguageCode = unfenced(Response.output).trim();
