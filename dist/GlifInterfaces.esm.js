@@ -88,6 +88,7 @@ var LanguageCodes = [
     'ar', 'bn', 'bg', 'zh', 'da', 'de', 'en', 'et', 'fi', 'fr', 'el', 'iw', 'hi', 'it',
     'ko', 'hr', 'nl', 'pt', 'es', 'cs', 'hu', 'unknown'
 ];
+var LanguageCodeSet = new Set(LanguageCodes);
 function LanguageOfText(Text) {
     return __awaiter(this, void 0, void 0, function () {
         var fencedText, Response, LanguageCode;
@@ -99,8 +100,8 @@ function LanguageOfText(Text) {
                     return [4 /*yield*/, GlifRunner.run('cm7d23nop0000ona1b5b1cotg', [fencedText])];
                 case 1:
                     Response = _a.sent();
-                    LanguageCode = unfenced(Response.output);
-                    return [2 /*return*/, (LanguageCodes.indexOf(LanguageCode) >= 0 ? LanguageCode : 'unknown')];
+                    LanguageCode = unfenced(Response.output).trim();
+                    return [2 /*return*/, (LanguageCodeSet.has(LanguageCode) ? LanguageCode : 'unknown')];
             }
         });
     });
