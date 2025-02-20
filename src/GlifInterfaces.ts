@@ -8,7 +8,8 @@
     expectText,
   } from "javascript-interface-library"
 
-  import { GlifRunner } from "GlifRunner"
+  import { GlifRunner } from "glifrunner"
+  export { GlifRunner }           // re-export GlifRunner to simplify agent code
 
 /**** make some existing types indexable ****/
 
@@ -56,4 +57,5 @@
     const LanguageCode = unfenced(Response.output as string)
     return (LanguageCodes.indexOf(LanguageCode) >= 0 ? LanguageCode : 'unknown')
   }
+
 
