@@ -49,7 +49,7 @@ For Svelte, it is recommended to import the package in a module context. From th
 </script>
 ```
 
-You may experiment with that code [in the Svelte REPL]()
+You may experiment with that code [in the Svelte REPL](https://svelte.dev/playground/350baed45fb249b58dedba2fd184d9e9?version=5.20.2)
 
 ## API Reference ##
 
