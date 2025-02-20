@@ -26,7 +26,7 @@ or load the plain script file directly
 
 How to access the package depends on the type of module you prefer
 
-* ESM (or Svelte): `import { GlifRunner } from 'glif-interfaces'`
+* ESM (or Svelte): `import { GlifRunner,LanguageOfText } from 'glif-interfaces'`
 * CommonJS: `const GlifInterfaces = require('glif-interfaces')`
 * AMD: `require(['glif-interfaces'], (GlifInterfaces) => {...})`
 
