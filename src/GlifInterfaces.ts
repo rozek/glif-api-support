@@ -105,4 +105,29 @@
     return unfenced(Response.output as string)
   }
 
+/**** ReviewOfSpecification - analyzes a given specification ****/
+
+  export async function ReviewOfSpecification (
+    Specification:string
+  ):Promise<string> {
+    expectText('specification to be reviewed',Specification)
+
+    const SpecificationLanguage = await LanguageOfText(Specification)
+    if ((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown')) {
+      const englishSpecification = await TranslationOfTextInto(Specification,'english')
+      const Review = await ReviewOf(englishSpecification)
+      return await TranslationOfTextInto(Review,SpecificationLanguage)
+    } else {
+      return await ReviewOf(Specification)
+    }
+  }
+
+  async function ReviewOf (Text:string):Promise<string> {
+    const fencableText = fencable(Text)
+    const Response     = await GlifRunner.run(
+      'cm7dkodqs000cd4qgh3rmq1fd',[fencableText]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
 
