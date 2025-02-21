@@ -141,6 +141,39 @@ import {
 })()
 ```
 
+You may repeatedly review and enhance your specification until either you or the AI seems confident enough that the specification may be implemented.
+
+### Code Generation ###
+
+Given a specification, some additional requirements (such as a certain code style or the libraries to be used) and an already existing implementation (if any) can be used to generate (or update) the corresponding JavaScript or TypeScript code (try yourself using the [Svelte REPL](https://svelte.dev/playground/b38c9e2b43be499f9273a99ac548388f?version=5.20.2)).
+
+> if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+```javascript
+import {
+  GlifRunner,
+  LanguageOfText, TranslationOfTextInto,
+  JavaScriptImplementationOf,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await JavaScriptImplementationOf(
+`
+Ein Pseudo-Zufallszahlengenerator in JavaScript wird benötigt, der in einer Browserumgebung funktioniert. Der Generator sollte einen "Linear Congruential Generator" (LCG) mit den folgenden Konstanten verwenden:
+
+Modulus (m): 2^32
+Multiplikator (a): 1664525
+Inkrement (c): 1013904223
+Startwert (x0): 12345
+
+Die Funktion sollte einen optionalen Startwert-Parameter akzeptieren und eine Sequenz von Pseudozufallszahlen zurückgeben.
+`, 'Vermeide Semikolons soweit möglich. Der fertige Code sollte ohne Dependencies auskommen und sofort einsetzbar sein', ''
+  ))
+})()
+```
+
 (more to come)
 
 ## API Reference ##
