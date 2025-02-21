@@ -212,6 +212,228 @@ function lcg(x0 = 12345) {
 
 The TypeScript code review works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/d56ed6e62cfc49b2a8de478c8768f315?version=5.20.2))
 
+### Code Fixing ###
+
+Given some code and an error message, this example tries to find the underlying problem and fix it (try yourself using the [Svelte REPL](https://svelte.dev/playground/c2ae27963600407db0c243c336d76b69?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  CodeWithFixForError,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await CodeWithFixForError(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    #return x0
+  }
+}
+`, 'Syntax Error'
+  ))
+})()
+```
+
+### Test Case Generation ###
+
+This example generates the (unit) test cases for a given code (try yourself using the [Svelte REPL](https://svelte.dev/playground/5b5a673127504a3da251b934fd7490f2?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  TestCasesForCode,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await TestCasesForCode(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    return x0
+  }
+}
+`, '', 'de'
+  ))
+})()
+```
+
+> if you don't understand the german output: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+### Test Generation ###
+
+Given an existing code and some test cases, this example implementes the listed (unit) tests (try yourself using the [Svelte REPL](https://svelte.dev/playground/1404ea40fd2841a781f5bffef4271136?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  TestsForJavaScript,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await TestsForJavaScript(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    return x0
+  }
+}
+`,`
+Testfälle:
+
+1. **Initialisierung**
+   - Überprüfen, dass die \`lcg\`-Funktion ohne Argumente aufgerufen werden kann und eine gültige Funktion zurückgibt.
+   - Überprüfen, dass die \`lcg\`-Funktion mit einem anfänglichen Startwert \`x0\` aufgerufen werden kann und eine gültige Funktion zurückgibt.
+
+2. **Zufallszahlenerzeugung**
+   - Überprüfen, dass die von \`lcg\` zurückgegebene Funktion eine Sequenz von Pseudozufallszahlen erzeugt.
+   - Überprüfen, dass die Sequenz der Pseudozufallszahlen deterministisch ist, d.h. dass die gleiche Sequenz erzeugt wird, wenn der gleiche Startwert \`x0\` verwendet wird.
+   - Überprüfen, dass die erzeugten Pseudozufallszahlen im erwarteten Bereich liegen (0 bis \`m - 1\`, wobei \`m = 2^32\`).
+
+3. **Modulo-Operation**
+   - Überprüfen, dass die Modulo-Operation \`% m\` korrekt auf das Ergebnis der linearen kongruenten Formel angewendet wird.
+
+4. **Lineare kongruente Formel**
+   - Überprüfen, dass die lineare kongruente Formel \`(a * x0 + c) % m\` korrekt implementiert ist.
+   - Überprüfen, dass die Werte von \`a\`, \`c\` und \`m\` korrekt sind.
+
+5. **Randfall**
+   - Überprüfen, dass die \`lcg\`-Funktion den Fall behandelt, in dem der anfängliche Startwert \`x0\` nicht angegeben wird (d.h. den Standardwert \`12345\` verwendet).
+   - Überprüfen, dass die \`lcg\`-Funktion den Fall behandelt, in dem der anfängliche Startwert \`x0\` sehr groß oder sehr klein ist.
+`, '', ''
+  ))
+})()
+```
+
+> if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+The TypeScript test generation works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/c7947be105084dc7a333098f08b9c8c7?version=5.20.2))
+
+### Synopsis Generation ###
+
+This example generates a short synopsis for a given code (try yourself using the [Svelte REPL](https://svelte.dev/playground/a0ee7664fe304ea9947300bf0997d3f2?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  SynopsisForCode,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await SynopsisForCode(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    return x0
+  }
+}
+`, 'german'
+  ))
+})()
+```
+
+> if you don't understand the german output: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+### Documentation Generation ###
+
+This example generates the technical documentation for a given code (try yourself using the [Svelte REPL](https://svelte.dev/playground/f828499208614b2d9ecc4e5ba6505636?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  DocumentationForCode,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await DocumentationForCode(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    return x0
+  }
+}
+`, '', 'german'
+  ))
+})()
+```
+
+> if you don't understand the german output: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+### Document from Notes ###
+
+The following example takes a list of notes and converts them into a complete text (try yourself using the [Svelte REPL](https://svelte.dev/playground/fae245689fd94397b21e75f0aefcdce6?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  DocumentFromNotes,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await DocumentFromNotes(
+`
+Zur Funktionsweise eines Linearer Kongruenzgenerators (LCG)
+
+- **Formel**: $$ X_{n+1} = (aX_n + b) \mod m $$
+- **Parameter**:
+  - $$ m $$: Modulus
+  - $$ a $$: Multiplikator
+  - $$ b $$: Inkrement
+  - $$ X_0 $$: Startwert
+- **Funktionsweise**:
+  - Modulare Arithmetik
+  - Pseudozufallszahlen
+  - Periodische Sequenz
+- **Anforderungen für maximale Periode**:
+  - $$ b $$ teilerfremd zu $$ m $$
+  - $$ a-1 $$ teilt jeden Primfaktor von $$ m $$
+  - $$ a-1 $$ teilt $$ 4 $$, wenn $$ m $$ durch $$ 4 $$ teilbar ist
+- **Typen**:
+  - Multiplikativ ($$ b = 0 $$)
+  - Gemischt ($$ b \neq 0 $$)
+`, '', 'german'
+  ))
+})()
+```
+
+> if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
 
 
 
