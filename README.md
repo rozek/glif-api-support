@@ -5,6 +5,7 @@ a growing list of TypeScript interfaces for Glifs intended to be used in AI agen
 > Nota bene: these "interfaces" often contain additional functionality that goes beyond what the underlying Glif does. Typical example: many "interfaces" detect the language of the original request - and if that is not english, they first translate the request into english, then run the underlying Glif and finally translate the answer back into the original language (if that translation makes sense).
 
 > **Important: in order to run Glifs via their API, you will have to [sign up for a Glif account](https://glif.app/signin) and [request your personal API Token](https://glif.app/settings/api-tokens)**
+> **Important: another nasty bug seems to prevent longer input texts (20k are already too long) - as a consequence, the functions in this module can only be used for simple and small demonstrators right now
 
 <span style="color:red">**Warning: due to a nasty bug in Glif, backticks cannot be entered into the prompt input fields of "Text Generation" blocks, thus damaging my prompts - as a consequence, the code and my examples may not work as expected!**</span>
 
