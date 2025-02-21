@@ -229,4 +229,21 @@
     return unfenced(Response.output as string)
   }
 
+/**** ReviewOfJavaScript - reviews code and suggests improvements ****/
+
+  export async function ReviewOfJavaScript (
+    Code:string, Constraints:string = ''
+  ):Promise<string> {
+    expectText                   ('code to be reviewed',Code)
+    expectText('additional requirements for the review',Constraints)
+
+    const fencableCode        = fencable(Code)
+    const fencableConstraints = fencable(Constraints)
+
+    const Response = await GlifRunner.run(
+      'cm7elpqsn0001r9m2arsv69k6',[fencableCode,fencableConstraints]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
 
