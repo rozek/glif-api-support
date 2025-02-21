@@ -190,6 +190,57 @@ function ReviewOf(Text) {
         });
     });
 }
+/**** SpecificationUpdatedUsing - modifies a given specification ****/
+function SpecificationUpdatedUsing(Specification, Instructions) {
+    return __awaiter(this, void 0, void 0, function () {
+        var InstructionLanguage, SpecificationLanguage, englishSpecification, Update;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('specification to be updated', Specification);
+                    expectText('update instructions', Instructions);
+                    return [4 /*yield*/, LanguageOfText(Instructions)];
+                case 1:
+                    InstructionLanguage = _a.sent();
+                    if (!((InstructionLanguage !== 'en') && (InstructionLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(Instructions, 'english')];
+                case 2:
+                    Instructions = _a.sent();
+                    _a.label = 3;
+                case 3: return [4 /*yield*/, LanguageOfText(Specification)];
+                case 4:
+                    SpecificationLanguage = _a.sent();
+                    if (!((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown'))) return [3 /*break*/, 8];
+                    return [4 /*yield*/, TranslationOfTextInto(Specification, 'english')];
+                case 5:
+                    englishSpecification = _a.sent();
+                    return [4 /*yield*/, UpdateOf(englishSpecification, Instructions)];
+                case 6:
+                    Update = _a.sent();
+                    return [4 /*yield*/, TranslationOfTextInto(Update, SpecificationLanguage)];
+                case 7: return [2 /*return*/, _a.sent()];
+                case 8: return [4 /*yield*/, UpdateOf(Specification, Instructions)];
+                case 9: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+function UpdateOf(Text, Instructions) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableText, fencableInstructions, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    fencableText = fencable(Text);
+                    fencableInstructions = fencable(Instructions);
+                    return [4 /*yield*/, GlifRunner.run('cm7e8tjlr000v5br0zmv8v6b8', [fencableText, fencableInstructions])];
+                case 1:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
 
-export { LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, TranslationOfTextInto, fencable, fenced, unfenced };
+export { LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, SpecificationUpdatedUsing, TranslationOfTextInto, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map

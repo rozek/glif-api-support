@@ -21,3 +21,5 @@ export declare function LanguageOfText(Text: string): Promise<LanguageCode>;
 export declare function TranslationOfTextInto(Text: string, TargetLanguage: Language | LanguageCode): Promise<string>;
 /**** ReviewOfSpecification - analyzes a given specification ****/
 export declare function ReviewOfSpecification(Specification: string): Promise<string>;
+/**** SpecificationUpdatedUsing - modifies a given specification ****/
+export declare function SpecificationUpdatedUsing(Specification: string, Instructions: string): Promise<string>;
