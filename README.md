@@ -81,6 +81,7 @@ Here is how to detect the language of a given text and how to translate it into 
 
   console.log(await LanguageOfText('Hello, World!'))
   console.log(await TranslationOfTextInto('Hello, World!','german'))
+})()
 ```
 
 The following languages are supported (these are the languages, the most common LLMs have been trained with. Your mileage may vary depending on LLM and language - "german" seems to work pretty well):
@@ -134,8 +135,10 @@ This example shows how to evaluate a given specification and how to update it by
     'Nutze einen "Linearen Kongruenzgenerator" (LCG). Vervollständige die ' +
     'Spezifikation so, daß eine sinnvoll einsetzbare Funktion entsteht'
   ))
+})()
 ```
 
+(more to come)
 
 ## API Reference ##
 
