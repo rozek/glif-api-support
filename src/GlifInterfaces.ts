@@ -196,4 +196,37 @@
     return unfenced(Response.output as string)
   }
 
+/**** TypeScriptImplementationOf - generates code for a given specification ****/
+
+  export async function TypeScriptImplementationOf (
+    Specification:string, Requirements:string = '', existingCode:string = ''
+  ):Promise<string> {
+    expectText          ('specification',Specification)
+    expectText('additional requirements',Requirements)
+    expectText          ('existing code',existingCode)
+
+    const SpecificationLanguage = await LanguageOfText(Specification)
+    if ((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown')) {
+      Specification = await TranslationOfTextInto(Specification,'english')
+    }
+
+    if (Requirements.trim() !== '') {
+      const RequirementsLanguage = await LanguageOfText(Requirements)
+      if ((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown')) {
+        Requirements = await TranslationOfTextInto(Requirements,'english')
+      }
+    }
+
+    const fencableSpecification = fencable(Specification)
+    const fencableRequirements  = fencable(Requirements)
+    const fencableCode          = fencable(existingCode)
+
+    const Response = await GlifRunner.run(
+      'cm7eiami8000zrs3de9432y8n',[
+        fencableSpecification,fencableRequirements,fencableCode
+      ]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
 
