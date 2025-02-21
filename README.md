@@ -112,7 +112,7 @@ If you want to experiment with that feature: here is the [underlying Glif](https
 
 ### Specification Review and Update ###
 
-This example shows how to evaluate a given specification and how to update it by applying a list of changes. Please note, that while the original input is in german, the Glif "interface" (not the underlying Glif!) first translates it into english, then runs the Glif and finally translates the output back into german - because LLMs can handle english much better than any other language.
+This example shows how to evaluate a given specification and how to update it by applying a list of changes. Please note, that while the original input is in german, the Glif "interface" (not the underlying Glif!) first translates it into english, then runs the Glif and finally translates the output back into german - because LLMs can handle english much better than any other language (try yourself using the [Svelte REPL](https://svelte.dev/playground/8f03810f210c4bd394625abf455340f6?version=5.20.2)).
 
 > if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
 
