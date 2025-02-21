@@ -23,3 +23,5 @@ export declare function TranslationOfTextInto(Text: string, TargetLanguage: Lang
 export declare function ReviewOfSpecification(Specification: string): Promise<string>;
 /**** SpecificationUpdatedUsing - modifies a given specification ****/
 export declare function SpecificationUpdatedUsing(Specification: string, Instructions: string): Promise<string>;
+/**** JavaScriptImplementationOf - generates code for a given specification ****/
+export declare function JavaScriptImplementationOf(Specification: string, Requirements?: string, existingCode?: string): Promise<string>;

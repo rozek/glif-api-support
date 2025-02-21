@@ -241,6 +241,50 @@ function UpdateOf(Text, Instructions) {
         });
     });
 }
+/**** JavaScriptImplementationOf - generates code for a given specification ****/
+function JavaScriptImplementationOf(Specification, Requirements, existingCode) {
+    if (Requirements === void 0) { Requirements = ''; }
+    if (existingCode === void 0) { existingCode = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var SpecificationLanguage, RequirementsLanguage, fencableSpecification, fencableRequirements, fencableCode, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('specification', Specification);
+                    expectText('additional requirements', Requirements);
+                    expectText('existing code', existingCode);
+                    return [4 /*yield*/, LanguageOfText(Specification)];
+                case 1:
+                    SpecificationLanguage = _a.sent();
+                    if (!((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(Specification, 'english')];
+                case 2:
+                    Specification = _a.sent();
+                    _a.label = 3;
+                case 3:
+                    if (!(Requirements.trim() !== '')) return [3 /*break*/, 6];
+                    return [4 /*yield*/, LanguageOfText(Requirements)];
+                case 4:
+                    RequirementsLanguage = _a.sent();
+                    if (!((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown'))) return [3 /*break*/, 6];
+                    return [4 /*yield*/, TranslationOfTextInto(Requirements, 'english')];
+                case 5:
+                    Requirements = _a.sent();
+                    _a.label = 6;
+                case 6:
+                    fencableSpecification = fencable(Specification);
+                    fencableRequirements = fencable(Requirements);
+                    fencableCode = fencable(existingCode);
+                    return [4 /*yield*/, GlifRunner.run('cm7ees8qw000110gd454cddv6', [
+                            fencableSpecification, fencableRequirements, fencableCode
+                        ])];
+                case 7:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
 
-export { LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, SpecificationUpdatedUsing, TranslationOfTextInto, fencable, fenced, unfenced };
+export { JavaScriptImplementationOf, LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, SpecificationUpdatedUsing, TranslationOfTextInto, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map
