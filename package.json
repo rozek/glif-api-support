@@ -1,6 +1,6 @@
 {
   "name": "glif-interfaces",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "a growing list of TypeScript interfaces for Glifs intended to be used in AI agents",
   "main": "./dist/GlifInterfaces.umd.js",
   "browser": "./dist/GlifInterfaces.umd.js",
