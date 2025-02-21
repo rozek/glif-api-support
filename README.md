@@ -4,6 +4,8 @@ a growing list of TypeScript interfaces for Glifs intended to be used in AI agen
 
 > Nota bene: these "interfaces" often contain additional functionality that goes beyond what the underlying Glif does. Typical example: many "interfaces" detect the language of the original request - and if that is not english, they first translate the request into english, then run the underlying Glif and finally translate the answer back into the original language (if that translation makes sense).
 
+> **Important: in order to run Glifs via their API, you will have to [sign up for a Glif account](https://glif.app/signin) and [request your personal API Token](https://glif.app/settings/api-tokens)**
+
 > if you like, directly jump to some [interactive Usage Examples](#examples)
 
 ## Overview ##
