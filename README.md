@@ -208,6 +208,11 @@ function lcg(x0 = 12345) {
 })()
 ```
 
+The TypeScript code review works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/d56ed6e62cfc49b2a8de478c8768f315?version=5.20.2))
+
+
+
+
 (more to come)
 
 ## API Reference ##
