@@ -250,6 +250,11 @@
         throwError('InvalidArgument:invalid "OutputLanguage" given')
     }
 
+    const ConstraintsLanguage = await LanguageOfText(Constraints)
+    if ((ConstraintsLanguage !== 'en') && (ConstraintsLanguage !== 'unknown')) {
+      Constraints = await TranslationOfTextInto(Constraints,'english')
+    }
+
     const fencableCode        = fencable(Code)
     const fencableConstraints = fencable(Constraints)
 
@@ -285,6 +290,11 @@
         break
       default:
         throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
+
+    const ConstraintsLanguage = await LanguageOfText(Constraints)
+    if ((ConstraintsLanguage !== 'en') && (ConstraintsLanguage !== 'unknown')) {
+      Constraints = await TranslationOfTextInto(Constraints,'english')
     }
 
     const fencableCode        = fencable(Code)
