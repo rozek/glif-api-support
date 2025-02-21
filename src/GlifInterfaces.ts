@@ -232,10 +232,23 @@
 /**** ReviewOfJavaScript - reviews code and suggests improvements ****/
 
   export async function ReviewOfJavaScript (
-    Code:string, Constraints:string = ''
+    Code:string, Constraints:string = '', OutputLanguage:string = 'en'
   ):Promise<string> {
     expectText                   ('code to be reviewed',Code)
     expectText('additional requirements for the review',Constraints)
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = 'en'
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
 
     const fencableCode        = fencable(Code)
     const fencableConstraints = fencable(Constraints)
@@ -243,16 +256,36 @@
     const Response = await GlifRunner.run(
       'cm7elpqsn0001r9m2arsv69k6',[fencableCode,fencableConstraints]
     ) as Indexable
-    return unfenced(Response.output as string)
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage
+      )
+    }
   }
 
 /**** ReviewOfTypeScript - reviews code and suggests improvements ****/
 
   export async function ReviewOfTypeScript (
-    Code:string, Constraints:string = ''
+    Code:string, Constraints:string = '', OutputLanguage:string = 'en'
   ):Promise<string> {
     expectText                   ('code to be reviewed',Code)
     expectText('additional requirements for the review',Constraints)
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = 'en'
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
 
     const fencableCode        = fencable(Code)
     const fencableConstraints = fencable(Constraints)
@@ -260,7 +293,14 @@
     const Response = await GlifRunner.run(
       'cm7et7g2u0000kdocnho1ej6u',[fencableCode,fencableConstraints]
     ) as Indexable
-    return unfenced(Response.output as string)
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage
+      )
+    }
   }
 
 
