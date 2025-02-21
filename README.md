@@ -176,6 +176,9 @@ Die Funktion sollte einen optionalen Startwert-Parameter akzeptieren und eine Se
 })()
 ```
 
+TypeScript code generation works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/114dbfd990264edc8dc4ee6e9d844720?version=5.20.2))
+
+
 (more to come)
 
 ## API Reference ##
