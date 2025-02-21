@@ -73,10 +73,10 @@ You may experiment with that code [in the Svelte REPL](https://svelte.dev/playgr
 Here is how to detect the language of a given text and how to translate it into a different language (try yourself using the [Svelte REPL](https://svelte.dev/playground/350baed45fb249b58dedba2fd184d9e9?version=5.20.2))
 
 ```javascript
-  import {
-    GlifRunner,
-    LanguageOfText,TranslationOfTextInto
-  } from "glif-interfaces"
+import {
+  GlifRunner,
+  LanguageOfText,TranslationOfTextInto
+} from "glif-interfaces"
 
 ;(async () => {
   GlifRunner.APIToken = '...'
@@ -119,10 +119,10 @@ This example shows how to evaluate a given specification and how to update it by
 > if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
 
 ```javascript
-  import {
-    GlifRunner,
-    ReviewOfSpecification, SpecificationUpdatedUsing,
-  } from "glif-interfaces"
+import {
+  GlifRunner,
+  ReviewOfSpecification, SpecificationUpdatedUsing,
+} from "glif-interfaces"
 
 ;(async () => {
   GlifRunner.APIToken = '...'
