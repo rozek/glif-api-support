@@ -28,6 +28,6 @@ export declare function JavaScriptImplementationOf(Specification: string, Requir
 /**** TypeScriptImplementationOf - generates code for a given specification ****/
 export declare function TypeScriptImplementationOf(Specification: string, Requirements?: string, existingCode?: string): Promise<string>;
 /**** ReviewOfJavaScript - reviews code and suggests improvements ****/
-export declare function ReviewOfJavaScript(Code: string, Constraints?: string): Promise<string>;
+export declare function ReviewOfJavaScript(Code: string, Constraints?: string, OutputLanguage?: string): Promise<string>;
 /**** ReviewOfTypeScript - reviews code and suggests improvements ****/
-export declare function ReviewOfTypeScript(Code: string, Constraints?: string): Promise<string>;
+export declare function ReviewOfTypeScript(Code: string, Constraints?: string, OutputLanguage?: string): Promise<string>;

@@ -330,8 +330,9 @@ function TypeScriptImplementationOf(Specification, Requirements, existingCode) {
     });
 }
 /**** ReviewOfJavaScript - reviews code and suggests improvements ****/
-function ReviewOfJavaScript(Code, Constraints) {
+function ReviewOfJavaScript(Code, Constraints, OutputLanguage) {
     if (Constraints === void 0) { Constraints = ''; }
+    if (OutputLanguage === void 0) { OutputLanguage = 'en'; }
     return __awaiter(this, void 0, void 0, function () {
         var fencableCode, fencableConstraints, Response;
         return __generator(this, function (_a) {
@@ -339,19 +340,37 @@ function ReviewOfJavaScript(Code, Constraints) {
                 case 0:
                     expectText('code to be reviewed', Code);
                     expectText('additional requirements for the review', Constraints);
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = 'en';
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
                     fencableCode = fencable(Code);
                     fencableConstraints = fencable(Constraints);
                     return [4 /*yield*/, GlifRunner.run('cm7elpqsn0001r9m2arsv69k6', [fencableCode, fencableConstraints])];
                 case 1:
                     Response = _a.sent();
-                    return [2 /*return*/, unfenced(Response.output)];
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
             }
         });
     });
 }
 /**** ReviewOfTypeScript - reviews code and suggests improvements ****/
-function ReviewOfTypeScript(Code, Constraints) {
+function ReviewOfTypeScript(Code, Constraints, OutputLanguage) {
     if (Constraints === void 0) { Constraints = ''; }
+    if (OutputLanguage === void 0) { OutputLanguage = 'en'; }
     return __awaiter(this, void 0, void 0, function () {
         var fencableCode, fencableConstraints, Response;
         return __generator(this, function (_a) {
@@ -359,12 +378,29 @@ function ReviewOfTypeScript(Code, Constraints) {
                 case 0:
                     expectText('code to be reviewed', Code);
                     expectText('additional requirements for the review', Constraints);
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = 'en';
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
                     fencableCode = fencable(Code);
                     fencableConstraints = fencable(Constraints);
                     return [4 /*yield*/, GlifRunner.run('cm7et7g2u0000kdocnho1ej6u', [fencableCode, fencableConstraints])];
                 case 1:
                     Response = _a.sent();
-                    return [2 /*return*/, unfenced(Response.output)];
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
             }
         });
     });
