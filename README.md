@@ -6,9 +6,9 @@ a growing list of TypeScript interfaces for Glifs intended to be used in AI agen
 
 > **Important: in order to run Glifs via their API, you will have to [sign up for a Glif account](https://glif.app/signin) and [request your personal API Token](https://glif.app/settings/api-tokens)**
 
-> **Important: another nasty bug seems to prevent longer input texts (20k are already too long) - as a consequence, the functions in this module can only be used for simple and small demonstrators right now**
+**Warning: due to a nasty bug in Glif, backticks cannot be entered into the prompt input fields of "Text Generation" blocks, thus damaging my prompts - as a consequence, the code and my examples may not work as expected!**
 
-<span style="color:red">**Warning: due to a nasty bug in Glif, backticks cannot be entered into the prompt input fields of "Text Generation" blocks, thus damaging my prompts - as a consequence, the code and my examples may not work as expected!**</span>
+**Warning: another nasty bug seems to prevent longer input texts (20k are already too long) - as a consequence, the functions in this module can only be used for simple and small demonstrators right now**
 
 > if you like, directly jump to some [interactive Usage Examples](#examples)
 
