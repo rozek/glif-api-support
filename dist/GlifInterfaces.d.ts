@@ -27,3 +27,5 @@ export declare function SpecificationUpdatedUsing(Specification: string, Instruc
 export declare function JavaScriptImplementationOf(Specification: string, Requirements?: string, existingCode?: string): Promise<string>;
 /**** TypeScriptImplementationOf - generates code for a given specification ****/
 export declare function TypeScriptImplementationOf(Specification: string, Requirements?: string, existingCode?: string): Promise<string>;
+/**** ReviewOfJavaScript - reviews code and suggests improvements ****/
+export declare function ReviewOfJavaScript(Code: string, Constraints?: string): Promise<string>;

@@ -329,6 +329,26 @@ function TypeScriptImplementationOf(Specification, Requirements, existingCode) {
         });
     });
 }
+/**** ReviewOfJavaScript - reviews code and suggests improvements ****/
+function ReviewOfJavaScript(Code, Constraints) {
+    if (Constraints === void 0) { Constraints = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableCode, fencableConstraints, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('code to be reviewed', Code);
+                    expectText('additional requirements for the review', Constraints);
+                    fencableCode = fencable(Code);
+                    fencableConstraints = fencable(Constraints);
+                    return [4 /*yield*/, GlifRunner.run('cm7elpqsn0001r9m2arsv69k6', [fencableCode, fencableConstraints])];
+                case 1:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
 
-export { JavaScriptImplementationOf, LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, SpecificationUpdatedUsing, TranslationOfTextInto, TypeScriptImplementationOf, fencable, fenced, unfenced };
+export { JavaScriptImplementationOf, LanguageCodes, LanguageOfText, Languages, ReviewOfJavaScript, ReviewOfSpecification, SpecificationUpdatedUsing, TranslationOfTextInto, TypeScriptImplementationOf, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map
