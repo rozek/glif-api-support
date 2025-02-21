@@ -64,7 +64,7 @@ You may experiment with that code [in the Svelte REPL](https://svelte.dev/playgr
 
 ## Examples ##
 
-`glif-interfaces` contains numerous building blocks for AI agents, here are some examples (please note, that these examples may seem primitive - otherwise they would become too long - but do not underestimate what you may do with these blocks in a real application with real-world inputs)
+`glif-interfaces` contains numerous building blocks for AI agents, here are some examples (please note, that these examples may seem primitive - otherwise they would become too long - but do not underestimate what you may be able to do with these blocks in a real application with real-world inputs)
 
 ### Language Detection and Translation ###
 
