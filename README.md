@@ -178,6 +178,35 @@ Die Funktion sollte einen optionalen Startwert-Parameter akzeptieren und eine Se
 
 TypeScript code generation works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/114dbfd990264edc8dc4ee6e9d844720?version=5.20.2))
 
+### Code Review ###
+
+Given a JavaScript or TypeScript code snippet, this example analyzes it and identifies actuel or potential problems (try yourself using the [Svelte REPL](https://svelte.dev/playground/f1eb2e4bf5744a2ea12b365b7c153077?version=5.20.2)).
+
+```javascript
+import {
+  GlifRunner,
+  ReviewOfJavaScript,
+} from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await ReviewOfJavaScript(
+`
+function lcg(x0 = 12345) {
+  const m = 2 ** 32
+  const a = 1664525
+  const c = 1013904223
+
+  return function() {
+    x0 = (a * x0 + c) % m
+    return x0
+  }
+}
+`
+  ))
+})()
+```
 
 (more to come)
 
