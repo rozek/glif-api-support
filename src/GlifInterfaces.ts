@@ -130,4 +130,37 @@
     return unfenced(Response.output as string)
   }
 
+/**** SpecificationUpdatedUsing - modifies a given specification ****/
+
+  export async function SpecificationUpdatedUsing (
+    Specification:string, Instructions:string
+  ):Promise<string> {
+    expectText('specification to be updated',Specification)
+    expectText        ('update instructions',Instructions)
+
+    const InstructionLanguage = await LanguageOfText(Instructions)
+    if ((InstructionLanguage !== 'en') && (InstructionLanguage !== 'unknown')) {
+      Instructions = await TranslationOfTextInto(Instructions,'english')
+    }
+
+    const SpecificationLanguage = await LanguageOfText(Specification)
+    if ((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown')) {
+      const englishSpecification = await TranslationOfTextInto(Specification,'english')
+      const Update = await UpdateOf(englishSpecification,Instructions)
+      return await TranslationOfTextInto(Update,SpecificationLanguage)
+    } else {
+      return await UpdateOf(Specification,Instructions)
+    }
+  }
+
+  async function UpdateOf (Text:string,Instructions:string):Promise<string> {
+    const fencableText         = fencable(Text)
+    const fencableInstructions = fencable(Instructions)
+
+    const Response = await GlifRunner.run(
+      'cm7e8tjlr000v5br0zmv8v6b8',[fencableText,fencableInstructions]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
 
