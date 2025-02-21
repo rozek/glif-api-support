@@ -64,6 +64,77 @@ You may experiment with that code [in the Svelte REPL](https://svelte.dev/playgr
 
 `glif-interfaces` contains numerous building blocks for AI agents, here are some examples (please note, that these examples may seem primitive - otherwise they would become too long - but do not underestimate what you may do with these blocks in a real application with real-world inputs)
 
+### Language Detection and Translation ###
+
+Here is how to detect the language of a given text and how to translate it into a different language
+
+```javascript
+  import {
+    GlifRunner,
+    LanguageOfText,TranslationOfTextInto
+  } from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await LanguageOfText('Hello, World!'))
+  console.log(await TranslationOfTextInto('Hello, World!','german'))
+```
+
+The following languages are supported (these are the languages, the most common LLMs have been trained with. Your mileage may vary depending on LLM and language - "german" seems to work pretty well):
+
+* arabic
+* bengali
+* bulgarian
+* chinese
+* danish
+* german
+* english
+* estonian
+* finnish
+* french
+* greek
+* hebrew
+* hindi
+* italian
+* korean
+* croatian
+* dutch
+* portuguese
+* spanish
+* czech
+* hungarian
+
+If you want to experiment with that feature: here is the [underlying Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)
+
+### Specification Review and Update ###
+
+This example shows how to evaluate a given specification and how to update it by applying a list of changes. Please note, that while the original input is in german, the Glif "interface" (not the underlying Glif!) first translates it into english, then runs the Glif and finally translates the output back into german - because LLMs can handle english much better than any other language.
+
+> if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
+
+```javascript
+  import {
+    GlifRunner,
+    ReviewOfSpecification, SpecificationUpdatedUsing,
+  } from "glif-interfaces"
+
+;(async () => {
+  GlifRunner.APIToken = '...'
+
+  console.log(await ReviewOfSpecification(
+    'verlangt wird ein Pseudo-Number Generator in TypeScript, der in ' +
+    'einer Browser-Umgebung funktioniert'
+  ))
+  console.log(await SpecificationUpdatedUsing(
+    'verlangt wird ein Pseudo-Number Generator in TypeScript, der in ' +
+    'einer Browser-Umgebung funktioniert',
+    'Nutze einen "Linearen Kongruenzgenerator" (LCG). Vervollständige die ' +
+    'Spezifikation so, daß eine sinnvoll einsetzbare Funktion entsteht'
+  ))
+```
+
+
 ## API Reference ##
 
 (t.b.w)
