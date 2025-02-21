@@ -68,7 +68,7 @@ You may experiment with that code [in the Svelte REPL](https://svelte.dev/playgr
 
 ### Language Detection and Translation ###
 
-Here is how to detect the language of a given text and how to translate it into a different language
+Here is how to detect the language of a given text and how to translate it into a different language (try yourself using the [Svelte REPL](https://svelte.dev/playground/350baed45fb249b58dedba2fd184d9e9?version=5.20.2))
 
 ```javascript
   import {
