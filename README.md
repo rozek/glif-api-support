@@ -203,10 +203,12 @@ function lcg(x0 = 12345) {
     return x0
   }
 }
-`
+`, 'ignoriere fehlende Kommentare', 'de'
   ))
 })()
 ```
+
+> if you don't understand the german input: the first example (and its [Glif](https://glif.app/@rozek/glifs/cm7dj2je40003yilbq4y0hl4h)) give you a possibility to translate it into your favourite language
 
 The TypeScript code review works in a similar way (see the related example in the [Svelte REPL](https://svelte.dev/playground/d56ed6e62cfc49b2a8de478c8768f315?version=5.20.2))
 
