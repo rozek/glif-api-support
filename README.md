@@ -441,6 +441,30 @@ Zur Funktionsweise eines Linearer Kongruenzgenerators (LCG)
 
 ## API Reference ##
 
+* `fencable(Text:string):string`<br>Escapes specific characters in the provided text to make it "fencable".
+* `fenced(Text:string):string`<br>Wraps the provided text between specific fence markers.
+* `unfenced(Text:string):string`<br>Removes the fence markers from the text and unescapes specific characters.<br>&nbsp;<br>
+* `LanguageOfText(Text:string):Promise<LanguageCode>`<br>Detects the language of the provided text and returns the corresponding language code.
+* `TranslationOfTextInto(Text:string, TargetLanguage:Language|LanguageCode):Promise<string>`<br>Translates the provided text into the specified target language.<br>&nbsp;<br>
+* `ReviewOfSpecification(Specification:string):Promise<string>`<br>Analyzes the given specification and returns a review.
+* `SpecificationUpdatedUsing(Specification:string, Instructions:string):Promise<string>`<br>Updates the given specification based on the provided instructions.<br>&nbsp;<br>
+* `JavaScriptImplementationOf(Specification:string, Requirements:string = '', existingCode:string = ''):Promise<string>`<br>Generates JavaScript code based on the provided specification and requirements.
+* `TypeScriptImplementationOf(Specification:string, Requirements:string = '', existingCode:string = ''):Promise<string>`<br>Generates TypeScript code based on the provided specification and requirements.<br>&nbsp;<br>
+* `ReviewOfJavaScript(Code:string, Constraints:string = '', OutputLanguage:string = 'en'):Promise<string>`<br>Reviews the provided JavaScript code and suggests improvements.
+* `ReviewOfTypeScript(Code:string, Constraints:string = '', OutputLanguage:string = 'en'):Promise<string>`<br>Reviews the provided TypeScript code and suggests improvements.<br>&nbsp;<br>
+* `CodeWithFixForError(Code:string, ErrorMessage:string):Promise<string>`<br>Fixes a specified error in the provided code.<br>&nbsp;<br>
+* `TestCasesForCode(Code:string, existingTestCases:string = '', OutputLanguage?:string):Promise<string>`<br>Generates a list of test cases for the provided code.
+* `TestsForJavaScript(Code:string, TestCases:string, Requirements:string = '', existingTests:string = ''):Promise<string>`<br>Generates a list of tests for the provided JavaScript code.
+* `TestsForTypeScript(Code:string, TestCases:string, Requirements:string = '', existingTests:string = ''):Promise<string>`<br>Generates a list of tests for the provided TypeScript code.<br>&nbsp;<br>
+* `SynopsisForCode(Code:string, OutputLanguage?:string):Promise<string>`<br>Generates a synopsis for the provided code.
+* `DocumentationForCode(Code:string, existingDocumentation:string = '', OutputLanguage?:string):Promise<string>`<br>Generates documentation for the provided code.<br>&nbsp;<br>
+* `DocumentFromNotes(Notes:string, existingDocument:string = '', OutputLanguage?:string):Promise<string>`<br>Generates well-formulated text from the provided notes.
+
+## Type Reference ##
+
+* `LanguageCode`<br>Represents a language code from the predefined list of supported language codes.
+* `Language`<br>Represents a language name from the predefined list of supported languages.
+
 (t.b.w)
 
 ## Build Instructions ##
