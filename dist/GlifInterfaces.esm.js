@@ -334,7 +334,7 @@ function ReviewOfJavaScript(Code, Constraints, OutputLanguage) {
     if (Constraints === void 0) { Constraints = ''; }
     if (OutputLanguage === void 0) { OutputLanguage = 'en'; }
     return __awaiter(this, void 0, void 0, function () {
-        var fencableCode, fencableConstraints, Response;
+        var ConstraintsLanguage, fencableCode, fencableConstraints, Response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -352,10 +352,19 @@ function ReviewOfJavaScript(Code, Constraints, OutputLanguage) {
                         default:
                             throwError('InvalidArgument:invalid "OutputLanguage" given');
                     }
+                    return [4 /*yield*/, LanguageOfText(Constraints)];
+                case 1:
+                    ConstraintsLanguage = _a.sent();
+                    if (!((ConstraintsLanguage !== 'en') && (ConstraintsLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(Constraints, 'english')];
+                case 2:
+                    Constraints = _a.sent();
+                    _a.label = 3;
+                case 3:
                     fencableCode = fencable(Code);
                     fencableConstraints = fencable(Constraints);
                     return [4 /*yield*/, GlifRunner.run('cm7elpqsn0001r9m2arsv69k6', [fencableCode, fencableConstraints])];
-                case 1:
+                case 4:
                     Response = _a.sent();
                     if (OutputLanguage === 'en') {
                         return [2 /*return*/, unfenced(Response.output)];
@@ -372,7 +381,7 @@ function ReviewOfTypeScript(Code, Constraints, OutputLanguage) {
     if (Constraints === void 0) { Constraints = ''; }
     if (OutputLanguage === void 0) { OutputLanguage = 'en'; }
     return __awaiter(this, void 0, void 0, function () {
-        var fencableCode, fencableConstraints, Response;
+        var ConstraintsLanguage, fencableCode, fencableConstraints, Response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -390,10 +399,19 @@ function ReviewOfTypeScript(Code, Constraints, OutputLanguage) {
                         default:
                             throwError('InvalidArgument:invalid "OutputLanguage" given');
                     }
+                    return [4 /*yield*/, LanguageOfText(Constraints)];
+                case 1:
+                    ConstraintsLanguage = _a.sent();
+                    if (!((ConstraintsLanguage !== 'en') && (ConstraintsLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(Constraints, 'english')];
+                case 2:
+                    Constraints = _a.sent();
+                    _a.label = 3;
+                case 3:
                     fencableCode = fencable(Code);
                     fencableConstraints = fencable(Constraints);
                     return [4 /*yield*/, GlifRunner.run('cm7et7g2u0000kdocnho1ej6u', [fencableCode, fencableConstraints])];
-                case 1:
+                case 4:
                     Response = _a.sent();
                     if (OutputLanguage === 'en') {
                         return [2 /*return*/, unfenced(Response.output)];
