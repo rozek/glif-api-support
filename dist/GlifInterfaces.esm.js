@@ -149,6 +149,47 @@ function TranslationOfTextInto(Text, TargetLanguage) {
         });
     });
 }
+/**** ReviewOfSpecification - analyzes a given specification ****/
+function ReviewOfSpecification(Specification) {
+    return __awaiter(this, void 0, void 0, function () {
+        var SpecificationLanguage, englishSpecification, Review;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('specification to be reviewed', Specification);
+                    return [4 /*yield*/, LanguageOfText(Specification)];
+                case 1:
+                    SpecificationLanguage = _a.sent();
+                    if (!((SpecificationLanguage !== 'en') && (SpecificationLanguage !== 'unknown'))) return [3 /*break*/, 5];
+                    return [4 /*yield*/, TranslationOfTextInto(Specification, 'english')];
+                case 2:
+                    englishSpecification = _a.sent();
+                    return [4 /*yield*/, ReviewOf(englishSpecification)];
+                case 3:
+                    Review = _a.sent();
+                    return [4 /*yield*/, TranslationOfTextInto(Review, SpecificationLanguage)];
+                case 4: return [2 /*return*/, _a.sent()];
+                case 5: return [4 /*yield*/, ReviewOf(Specification)];
+                case 6: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+function ReviewOf(Text) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableText, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    fencableText = fencable(Text);
+                    return [4 /*yield*/, GlifRunner.run('cm7dkodqs000cd4qgh3rmq1fd', [fencableText])];
+                case 1:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
 
-export { LanguageCodes, LanguageOfText, Languages, TranslationOfTextInto, fencable, fenced, unfenced };
+export { LanguageCodes, LanguageOfText, Languages, ReviewOfSpecification, TranslationOfTextInto, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map

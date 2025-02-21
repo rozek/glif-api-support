@@ -19,3 +19,5 @@ export type Language = typeof Languages[number];
 export declare function LanguageOfText(Text: string): Promise<LanguageCode>;
 /**** TranslationOfTextInto - translates a given text into a supported language ****/
 export declare function TranslationOfTextInto(Text: string, TargetLanguage: Language | LanguageCode): Promise<string>;
+/**** ReviewOfSpecification - analyzes a given specification ****/
+export declare function ReviewOfSpecification(Specification: string): Promise<string>;
