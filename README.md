@@ -6,6 +6,12 @@ a growing list of TypeScript interfaces for Glifs intended to be used in AI agen
 
 (t.b.w)
 
+### Limitations ###
+
+In order to remain cheap enough for my students, the LLMs used here are relatively small and may not produce output of the same quality as larger models from Open AI and other global players. In addition, context lengths and token generation limits of Glif models seem to be smaller than those of "professional" LLMs.
+
+Nevertheless, these components show what is possible and how it may be achieved - perfect for personal experiments and application prototypes. And if you need to enhance the blocks provided by the original `glif-interfaces`: you are free to fork your own variant and prepare your own Glifs with your own LLMs or LLMs of other provider with your own account at any time, otherwise keeping your application the same.
+
 ## Installation ##
 
 `glif-interfaces` may be used as an ECMAScript module (ESM), a CommonJS or AMD module or from a global variable.
@@ -51,6 +57,10 @@ For Svelte, it is recommended to import the package in a module context. From th
 ```
 
 You may experiment with that code [in the Svelte REPL](https://svelte.dev/playground/350baed45fb249b58dedba2fd184d9e9?version=5.20.2)
+
+## Examples ##
+
+`glif-interfaces` contains numerous building blocks for AI agents, here are some examples (please note, that these examples may seem primitive - otherwise they would become too long - but do not underestimate what you may do with these blocks in a real application with real-world inputs)
 
 ## API Reference ##
 
