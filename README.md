@@ -134,8 +134,9 @@ import {
   console.log(await SpecificationUpdatedUsing(
     'verlangt wird ein Pseudo-Number Generator in TypeScript, der in ' +
     'einer Browser-Umgebung funktioniert',
-    'Nutze einen "Linearen Kongruenzgenerator" (LCG). Vervollständige die ' +
-    'Spezifikation so, daß eine sinnvoll einsetzbare Funktion entsteht'
+    'Verwende einen "Linearen Kongruenzgenerator" (LCG). Vervollständige die ' +
+    'Spezifikation so, daß eine einfache und sinnvoll einsetzbare Funktion ' +
+    'entsteht. Wähle insbesondere vernünftige Konstanten für den LCG'
   ))
 })()
 ```
