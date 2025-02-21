@@ -313,4 +313,264 @@
     }
   }
 
+/**** CodeWithFixForError - fixes a given error in some code ****/
+
+  export async function CodeWithFixForError (
+    Code:string, ErrorMessage:string
+  ):Promise<string> {
+    expectText('code to be fixed',Code)
+    expectText   ('error message',ErrorMessage)
+
+    const fencableCode    = fencable(Code)
+    const fencableMessage = fencable(ErrorMessage)
+
+    const Response = await GlifRunner.run(
+      'cm7exp7de000o9zzsyeb5qsjc',[fencableCode,fencableMessage]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
+/**** TestCasesForCode - generates a list of test cases for some code ****/
+
+  export async function TestCasesForCode (
+    Code:string, existingTestCases:string = '', OutputLanguage?:string
+  ):Promise<string> {
+    expectText  ('code to be tested',Code)
+    expectText('existing test cases',existingTestCases)
+
+    const TestCaseLanguage = (
+      existingTestCases.trim() === ''
+      ? 'en'
+      : await LanguageOfText(existingTestCases)
+    )
+    if ((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown')) {
+      existingTestCases = await TranslationOfTextInto(existingTestCases,'english')
+    }
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = TestCaseLanguage
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage as string]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
+
+    const fencableCode      = fencable(Code)
+    const fencableTestCases = fencable(existingTestCases)
+
+    const Response = await GlifRunner.run(
+      'cm7ey5m1e000s98rtfgh68x4a',[fencableCode,fencableTestCases]
+    ) as Indexable
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage as string
+      )
+    }
+  }
+
+/**** TestsForJavaScript - generates a list of tests for some code ****/
+
+  export async function TestsForJavaScript (
+    Code:string, TestCases:string, Requirements:string = '', existingTests:string = ''
+  ):Promise<string> {
+    expectText           ('code to be tested',Code)
+    expectText('test cases to be implemented',TestCases)
+    expectText     ('additional requirements',Requirements)
+    expectText              ('existing tests',existingTests)
+
+    const TestCaseLanguage = await LanguageOfText(TestCases)
+    if ((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown')) {
+      TestCases = await TranslationOfTextInto(TestCases,'english')
+    }
+
+    if (Requirements.trim() !== '') {
+      const RequirementsLanguage = await LanguageOfText(Requirements)
+      if ((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown')) {
+        Requirements = await TranslationOfTextInto(Requirements,'english')
+      }
+    }
+
+    const fencableCode         = fencable(Code)
+    const fencableTestCases    = fencable(TestCases)
+    const fencableRequirements = fencable(Requirements)
+    const fencableTests        = fencable(existingTests)
+
+    const Response = await GlifRunner.run(
+      'cm7eyjjl5000ekbfp0r8u11cf',[
+        fencableCode,fencableRequirements,fencableTestCases
+      ]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
+/**** TestsForTypeScript - generates a list of tests for some code ****/
+
+  export async function TestsForTypeScript (
+    Code:string, TestCases:string, Requirements:string = '', existingTests:string = ''
+  ):Promise<string> {
+    expectText           ('code to be tested',Code)
+    expectText('test cases to be implemented',TestCases)
+    expectText     ('additional requirements',Requirements)
+    expectText              ('existing tests',existingTests)
+
+    const TestCaseLanguage = await LanguageOfText(TestCases)
+    if ((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown')) {
+      TestCases = await TranslationOfTextInto(TestCases,'english')
+    }
+
+    if (Requirements.trim() !== '') {
+      const RequirementsLanguage = await LanguageOfText(Requirements)
+      if ((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown')) {
+        Requirements = await TranslationOfTextInto(Requirements,'english')
+      }
+    }
+
+    const fencableCode         = fencable(Code)
+    const fencableTestCases    = fencable(TestCases)
+    const fencableRequirements = fencable(Requirements)
+    const fencableTests        = fencable(existingTests)
+
+    const Response = await GlifRunner.run(
+      'cm7eyq0lm0001gft68ai8is3v',[
+        fencableCode,fencableRequirements,fencableTestCases
+      ]
+    ) as Indexable
+    return unfenced(Response.output as string)
+  }
+
+/**** SynopsisForCode - generates a synopsis for some code ****/
+
+  export async function SynopsisForCode (
+    Code:string, OutputLanguage?:string
+  ):Promise<string> {
+    expectText('code to be described',Code)
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = 'en'
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage as string]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
+
+    const fencableCode = fencable(Code)
+
+    const Response = await GlifRunner.run(
+      'cm7eytltw001598rttvoar331',[fencableCode]
+    ) as Indexable
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage as string
+      )
+    }
+  }
+
+/**** DocumentationForCode - generates the documentation for some code ****/
+
+  export async function DocumentationForCode (
+    Code:string, existingDocumentation:string = '', OutputLanguage?:string
+  ):Promise<string> {
+    expectText ('code to be documented',Code)
+    expectText('existing documentation',existingDocumentation)
+
+    const DocumentationLanguage = (
+      existingDocumentation.trim() === ''
+      ? 'en'
+      : await LanguageOfText(existingDocumentation)
+    )
+    if ((DocumentationLanguage !== 'en') && (DocumentationLanguage !== 'unknown')) {
+      existingDocumentation = await TranslationOfTextInto(existingDocumentation,'english')
+    }
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = DocumentationLanguage
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage as string]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
+
+    const fencableCode          = fencable(Code)
+    const fencableDocumentation = fencable(existingDocumentation)
+
+    const Response = await GlifRunner.run(
+      'cm7ez394y000c134jrtyppcv4',[fencableCode,fencableDocumentation]
+    ) as Indexable
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage as string
+      )
+    }
+  }
+
+/**** DocumentFromNotes - generates well-formulated text from given notes ****/
+
+  export async function DocumentFromNotes (
+    Notes:string, existingDocument:string = '', OutputLanguage?:string
+  ):Promise<string> {
+    expectText            ('notes',Notes)
+    expectText('existing document',existingDocument)
+
+    const DocumentLanguage = (
+      existingDocument.trim() === ''
+      ? 'en'
+      : await LanguageOfText(existingDocument)
+    )
+    if ((DocumentLanguage !== 'en') && (DocumentLanguage !== 'unknown')) {
+      existingDocument = await TranslationOfTextInto(existingDocument,'english')
+    }
+
+    switch (true) {
+      case (OutputLanguage ==  null):
+      case (OutputLanguage === 'unknown'):
+        OutputLanguage = DocumentLanguage
+        break
+      case ValueIsOneOf(OutputLanguage,LanguageCodes):
+        OutputLanguage = LanguageSet[OutputLanguage as string]
+      case ValueIsOneOf(OutputLanguage,Languages):
+        break
+      default:
+        throwError('InvalidArgument:invalid "OutputLanguage" given')
+    }
+
+    const fencableNotes    = fencable(Notes)
+    const fencableDocument = fencable(existingDocument)
+
+    const Response = await GlifRunner.run(
+      'cm7ezlgi9000056p330nc11v9',[fencableNotes,fencableDocument]
+    ) as Indexable
+
+    if (OutputLanguage === 'en') {
+      return unfenced(Response.output as string)
+    } else {
+      return TranslationOfTextInto(
+        unfenced(Response.output as string), OutputLanguage as string
+      )
+    }
+  }
+
 
