@@ -2,6 +2,8 @@
 
 a growing list of TypeScript interfaces for Glifs intended to be used in AI agents
 
+> Nota bene: these "interfaces" often contain additional functionality that goes beyond what the underlying Glif does. Typical example: many "interfaces" detect the language of the original request - and if that is not english, they first translate the request into english, then run the underlying Glif and finally translate the answer back into the original language (if that translation makes sense).
+
 ## Overview ##
 
 (t.b.w)
