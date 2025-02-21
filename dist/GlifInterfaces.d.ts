@@ -31,3 +31,17 @@ export declare function TypeScriptImplementationOf(Specification: string, Requir
 export declare function ReviewOfJavaScript(Code: string, Constraints?: string, OutputLanguage?: string): Promise<string>;
 /**** ReviewOfTypeScript - reviews code and suggests improvements ****/
 export declare function ReviewOfTypeScript(Code: string, Constraints?: string, OutputLanguage?: string): Promise<string>;
+/**** CodeWithFixForError - fixes a given error in some code ****/
+export declare function CodeWithFixForError(Code: string, ErrorMessage: string): Promise<string>;
+/**** TestCasesForCode - generates a list of test cases for some code ****/
+export declare function TestCasesForCode(Code: string, existingTestCases?: string, OutputLanguage?: string): Promise<string>;
+/**** TestsForJavaScript - generates a list of tests for some code ****/
+export declare function TestsForJavaScript(Code: string, TestCases: string, Requirements?: string, existingTests?: string): Promise<string>;
+/**** TestsForTypeScript - generates a list of tests for some code ****/
+export declare function TestsForTypeScript(Code: string, TestCases: string, Requirements?: string, existingTests?: string): Promise<string>;
+/**** SynopsisForCode - generates a synopsis for some code ****/
+export declare function SynopsisForCode(Code: string, OutputLanguage?: string): Promise<string>;
+/**** DocumentationForCode - generates the documentation for some code ****/
+export declare function DocumentationForCode(Code: string, existingDocumentation?: string, OutputLanguage?: string): Promise<string>;
+/**** DocumentFromNotes - generates well-formulated text from given notes ****/
+export declare function DocumentFromNotes(Notes: string, existingDocument?: string, OutputLanguage?: string): Promise<string>;

@@ -423,6 +423,307 @@ function ReviewOfTypeScript(Code, Constraints, OutputLanguage) {
         });
     });
 }
+/**** CodeWithFixForError - fixes a given error in some code ****/
+function CodeWithFixForError(Code, ErrorMessage) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableCode, fencableMessage, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('code to be fixed', Code);
+                    expectText('error message', ErrorMessage);
+                    fencableCode = fencable(Code);
+                    fencableMessage = fencable(ErrorMessage);
+                    return [4 /*yield*/, GlifRunner.run('cm7exp7de000o9zzsyeb5qsjc', [fencableCode, fencableMessage])];
+                case 1:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
+/**** TestCasesForCode - generates a list of test cases for some code ****/
+function TestCasesForCode(Code, existingTestCases, OutputLanguage) {
+    if (existingTestCases === void 0) { existingTestCases = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var TestCaseLanguage, _a, fencableCode, fencableTestCases, Response;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    expectText('code to be tested', Code);
+                    expectText('existing test cases', existingTestCases);
+                    if (!(existingTestCases.trim() === '')) return [3 /*break*/, 1];
+                    _a = 'en';
+                    return [3 /*break*/, 3];
+                case 1: return [4 /*yield*/, LanguageOfText(existingTestCases)];
+                case 2:
+                    _a = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    TestCaseLanguage = (_a);
+                    if (!((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown'))) return [3 /*break*/, 5];
+                    return [4 /*yield*/, TranslationOfTextInto(existingTestCases, 'english')];
+                case 4:
+                    existingTestCases = _b.sent();
+                    _b.label = 5;
+                case 5:
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = TestCaseLanguage;
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
+                    fencableCode = fencable(Code);
+                    fencableTestCases = fencable(existingTestCases);
+                    return [4 /*yield*/, GlifRunner.run('cm7ey5m1e000s98rtfgh68x4a', [fencableCode, fencableTestCases])];
+                case 6:
+                    Response = _b.sent();
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
+            }
+        });
+    });
+}
+/**** TestsForJavaScript - generates a list of tests for some code ****/
+function TestsForJavaScript(Code, TestCases, Requirements, existingTests) {
+    if (Requirements === void 0) { Requirements = ''; }
+    if (existingTests === void 0) { existingTests = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var TestCaseLanguage, RequirementsLanguage, fencableCode, fencableTestCases, fencableRequirements, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('code to be tested', Code);
+                    expectText('test cases to be implemented', TestCases);
+                    expectText('additional requirements', Requirements);
+                    expectText('existing tests', existingTests);
+                    return [4 /*yield*/, LanguageOfText(TestCases)];
+                case 1:
+                    TestCaseLanguage = _a.sent();
+                    if (!((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(TestCases, 'english')];
+                case 2:
+                    TestCases = _a.sent();
+                    _a.label = 3;
+                case 3:
+                    if (!(Requirements.trim() !== '')) return [3 /*break*/, 6];
+                    return [4 /*yield*/, LanguageOfText(Requirements)];
+                case 4:
+                    RequirementsLanguage = _a.sent();
+                    if (!((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown'))) return [3 /*break*/, 6];
+                    return [4 /*yield*/, TranslationOfTextInto(Requirements, 'english')];
+                case 5:
+                    Requirements = _a.sent();
+                    _a.label = 6;
+                case 6:
+                    fencableCode = fencable(Code);
+                    fencableTestCases = fencable(TestCases);
+                    fencableRequirements = fencable(Requirements);
+                    fencable(existingTests);
+                    return [4 /*yield*/, GlifRunner.run('cm7eyjjl5000ekbfp0r8u11cf', [
+                            fencableCode, fencableRequirements, fencableTestCases
+                        ])];
+                case 7:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
+/**** TestsForTypeScript - generates a list of tests for some code ****/
+function TestsForTypeScript(Code, TestCases, Requirements, existingTests) {
+    if (Requirements === void 0) { Requirements = ''; }
+    if (existingTests === void 0) { existingTests = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var TestCaseLanguage, RequirementsLanguage, fencableCode, fencableTestCases, fencableRequirements, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('code to be tested', Code);
+                    expectText('test cases to be implemented', TestCases);
+                    expectText('additional requirements', Requirements);
+                    expectText('existing tests', existingTests);
+                    return [4 /*yield*/, LanguageOfText(TestCases)];
+                case 1:
+                    TestCaseLanguage = _a.sent();
+                    if (!((TestCaseLanguage !== 'en') && (TestCaseLanguage !== 'unknown'))) return [3 /*break*/, 3];
+                    return [4 /*yield*/, TranslationOfTextInto(TestCases, 'english')];
+                case 2:
+                    TestCases = _a.sent();
+                    _a.label = 3;
+                case 3:
+                    if (!(Requirements.trim() !== '')) return [3 /*break*/, 6];
+                    return [4 /*yield*/, LanguageOfText(Requirements)];
+                case 4:
+                    RequirementsLanguage = _a.sent();
+                    if (!((RequirementsLanguage !== 'en') && (RequirementsLanguage !== 'unknown'))) return [3 /*break*/, 6];
+                    return [4 /*yield*/, TranslationOfTextInto(Requirements, 'english')];
+                case 5:
+                    Requirements = _a.sent();
+                    _a.label = 6;
+                case 6:
+                    fencableCode = fencable(Code);
+                    fencableTestCases = fencable(TestCases);
+                    fencableRequirements = fencable(Requirements);
+                    fencable(existingTests);
+                    return [4 /*yield*/, GlifRunner.run('cm7eyq0lm0001gft68ai8is3v', [
+                            fencableCode, fencableRequirements, fencableTestCases
+                        ])];
+                case 7:
+                    Response = _a.sent();
+                    return [2 /*return*/, unfenced(Response.output)];
+            }
+        });
+    });
+}
+/**** SynopsisForCode - generates a synopsis for some code ****/
+function SynopsisForCode(Code, OutputLanguage) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fencableCode, Response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectText('code to be described', Code);
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = 'en';
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
+                    fencableCode = fencable(Code);
+                    return [4 /*yield*/, GlifRunner.run('cm7eytltw001598rttvoar331', [fencableCode])];
+                case 1:
+                    Response = _a.sent();
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
+            }
+        });
+    });
+}
+/**** DocumentationForCode - generates the documentation for some code ****/
+function DocumentationForCode(Code, existingDocumentation, OutputLanguage) {
+    if (existingDocumentation === void 0) { existingDocumentation = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var DocumentationLanguage, _a, fencableCode, fencableDocumentation, Response;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    expectText('code to be documented', Code);
+                    expectText('existing documentation', existingDocumentation);
+                    if (!(existingDocumentation.trim() === '')) return [3 /*break*/, 1];
+                    _a = 'en';
+                    return [3 /*break*/, 3];
+                case 1: return [4 /*yield*/, LanguageOfText(existingDocumentation)];
+                case 2:
+                    _a = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    DocumentationLanguage = (_a);
+                    if (!((DocumentationLanguage !== 'en') && (DocumentationLanguage !== 'unknown'))) return [3 /*break*/, 5];
+                    return [4 /*yield*/, TranslationOfTextInto(existingDocumentation, 'english')];
+                case 4:
+                    existingDocumentation = _b.sent();
+                    _b.label = 5;
+                case 5:
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = DocumentationLanguage;
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
+                    fencableCode = fencable(Code);
+                    fencableDocumentation = fencable(existingDocumentation);
+                    return [4 /*yield*/, GlifRunner.run('cm7ez394y000c134jrtyppcv4', [fencableCode, fencableDocumentation])];
+                case 6:
+                    Response = _b.sent();
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
+            }
+        });
+    });
+}
+/**** DocumentFromNotes - generates well-formulated text from given notes ****/
+function DocumentFromNotes(Notes, existingDocument, OutputLanguage) {
+    if (existingDocument === void 0) { existingDocument = ''; }
+    return __awaiter(this, void 0, void 0, function () {
+        var DocumentLanguage, _a, fencableNotes, fencableDocument, Response;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    expectText('notes', Notes);
+                    expectText('existing document', existingDocument);
+                    if (!(existingDocument.trim() === '')) return [3 /*break*/, 1];
+                    _a = 'en';
+                    return [3 /*break*/, 3];
+                case 1: return [4 /*yield*/, LanguageOfText(existingDocument)];
+                case 2:
+                    _a = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    DocumentLanguage = (_a);
+                    if (!((DocumentLanguage !== 'en') && (DocumentLanguage !== 'unknown'))) return [3 /*break*/, 5];
+                    return [4 /*yield*/, TranslationOfTextInto(existingDocument, 'english')];
+                case 4:
+                    existingDocument = _b.sent();
+                    _b.label = 5;
+                case 5:
+                    switch (true) {
+                        case (OutputLanguage == null):
+                        case (OutputLanguage === 'unknown'):
+                            OutputLanguage = DocumentLanguage;
+                            break;
+                        case ValueIsOneOf(OutputLanguage, LanguageCodes):
+                            OutputLanguage = LanguageSet[OutputLanguage];
+                        case ValueIsOneOf(OutputLanguage, Languages):
+                            break;
+                        default:
+                            throwError('InvalidArgument:invalid "OutputLanguage" given');
+                    }
+                    fencableNotes = fencable(Notes);
+                    fencableDocument = fencable(existingDocument);
+                    return [4 /*yield*/, GlifRunner.run('cm7ezlgi9000056p330nc11v9', [fencableNotes, fencableDocument])];
+                case 6:
+                    Response = _b.sent();
+                    if (OutputLanguage === 'en') {
+                        return [2 /*return*/, unfenced(Response.output)];
+                    }
+                    else {
+                        return [2 /*return*/, TranslationOfTextInto(unfenced(Response.output), OutputLanguage)];
+                    }
+            }
+        });
+    });
+}
 
-export { JavaScriptImplementationOf, LanguageCodes, LanguageOfText, Languages, ReviewOfJavaScript, ReviewOfSpecification, ReviewOfTypeScript, SpecificationUpdatedUsing, TranslationOfTextInto, TypeScriptImplementationOf, fencable, fenced, unfenced };
+export { CodeWithFixForError, DocumentFromNotes, DocumentationForCode, JavaScriptImplementationOf, LanguageCodes, LanguageOfText, Languages, ReviewOfJavaScript, ReviewOfSpecification, ReviewOfTypeScript, SpecificationUpdatedUsing, SynopsisForCode, TestCasesForCode, TestsForJavaScript, TestsForTypeScript, TranslationOfTextInto, TypeScriptImplementationOf, fencable, fenced, unfenced };
 //# sourceMappingURL=GlifInterfaces.esm.js.map
